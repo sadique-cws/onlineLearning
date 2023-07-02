@@ -49,7 +49,7 @@
                   <i class="fas fa-search"></i>
                 </button>
                 <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
+                  <i class="fas fa-po"></i>
                 </button>
               </div>
             </div>
@@ -171,8 +171,11 @@
         <div class="image">
           <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          <a href="#" class="d-block">Sadique Hussain</a>
+        <div class="info d-flex">
+          <a href="#" class="d-block">@if(auth()->guard('admin')->check()) {{ auth()->guard('admin')->user()->username }}
+        @endif</a>
+
+        <a href="{{route('admin.logout')}}" class="btn btn-danger ml-4 btn-sm">Logout</a>
         </div>
       </div>
 
@@ -853,10 +856,11 @@
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('/js/adminlte.js') }}"></script>
+
 <!-- overlayScrollbars -->
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('/js/adminlte.js') }}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->

@@ -24,7 +24,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example2" class="table table-bordered table-hover table-sm">
                   <thead>
                   <tr>
                     <th>id</th>
@@ -48,7 +48,7 @@
                                 <img width="80px" src="{{ asset('storage/'.$item->image) }}"/>
                             @endif
                           </td>
-                          <td>
+                          <td class="d-flex gap-3">
                               <form action="{{ route('courses.destroy',$item) }}" method="post">
                                 @csrf 
                                 @method('delete')
