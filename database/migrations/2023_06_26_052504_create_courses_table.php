@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->date('start_date');
             $table->float('fees');
+            $table->foreignId('category_id')->constrained('categories')->nullable();
             $table->float('discount_fees')->nullable();
             $table->timestamps();
             $table->string('image')->nullable();

@@ -6,7 +6,7 @@
         <div class="hidden sm:block">
           <div class="ml-4 flex items-center space-x-4">
             <a href="{{route('login')}}" class="hover:bg-green-600 bg-green-500 px-2 rounded-md text-white py-1">Student Login</a>
-            <a href="{{route('register')}}" class="hover:bg-orange-600 bg-orange-500 px-2 rounded-md text-white py-1">Apply for Admission</a>
+            <a href="{{route('register')}}" class="hover:bg-red-600 bg-red-500 px-2 rounded-md text-white py-1">Apply for Admission</a>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center">
           <!-- Logo -->
-          <a href="/" class="text-white font-bold text-xl">My Education Site</a>
+          <a href="/" class="text-white font-bold text-xl">{{ env('APP_NAME')}}</a>
         </div>
   
         <!-- Mobile Menu Button -->

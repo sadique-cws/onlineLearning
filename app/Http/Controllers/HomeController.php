@@ -11,4 +11,8 @@ class HomeController extends Controller
         $courses = Course::all();
         return view('home.home',compact('courses'));
     }
+    public function viewCourse($slug){
+        $course = Course::where('slug',$slug)->firstOrFail();
+        return view('home.view',compact('course'));
+    }
 }
