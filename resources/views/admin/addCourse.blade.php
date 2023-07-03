@@ -19,7 +19,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-  
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -37,8 +37,8 @@
                 @csrf
                 @if($update)
                  @method('put')
-                 @endif 
-                 
+                 @endif
+
                 <div class="card-body">
                  <div class="row">
                   <div class="form-group col-lg-6">
@@ -56,12 +56,29 @@
                     @enderror
                   </div>
                  </div>
-                  <div class="form-group">
-                    <label for="duration">Duration in (week)</label>
-                    <input type="number" name="duration" class="form-control" id="duration" placeholder="Enter duration" value="{{ ($update)? $course->duration : old('duration') }}"/>
-                    @error('duration')
-                        <p class="small text-danger">{{ $message }}</p>
-                    @enderror
+                  <div class="row">
+                    <div class="form-group col">
+                        <label for="duration">Duration in (week)</label>
+                        <input type="number" name="duration" class="form-control" id="duration" placeholder="Enter duration" value="{{ ($update)? $course->duration : old('duration') }}"/>
+                        @error('duration')
+                            <p class="small text-danger">{{ $message }}</p>
+                        @enderror
+                      </div>
+                      <div class="form-group col">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control" id="category">
+                            <option value="{{ ($update)? $course->category->id : "" }}"> {{ ($update)? $course->category->cat_title : "select category" }}</option>
+                            <option value="" disabled>----------------------</option>
+
+                            @foreach ($category as $item)
+                                <option value="{{$item->id}}">{{$item->cat_title}}</option>
+                            @endforeach
+
+                        </select>
+                        @error('category')
+                            <p class="small text-danger">{{ $message }}</p>
+                        @enderror
+                      </div>
                   </div>
                  <div class="row">
                   <div class="form-group col-lg-6">
@@ -79,7 +96,7 @@
                     @enderror
                   </div>
                  </div>
-                 
+
                   <div class="row">
                     <div class="form-group col-lg-10">
                       <label for="exampleInputFile">Image</label>
@@ -106,22 +123,22 @@
                     </div>
                   </div>
                 </div>
-  
+
                 </div>
-                
+
                               <!-- /.card-body -->
-  
+
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">{{($update) ? "Update": "Create"}}</button>
                 </div>
               </form>
             </div>
             <!-- /.card -->
-  
+
           </div>
           <!--/.col (left) -->
           <!-- right column -->
-       
+
           <!--/.col (right) -->
         </div>
         <!-- /.row -->

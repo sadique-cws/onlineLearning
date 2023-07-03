@@ -7,12 +7,12 @@
             <div class="container-fluid">
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Manage Courses ({{ count($courses) }})</h1>
+                  <h1>Manage Category ({{ count($categories) }})</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Manage Courses</li>
+                    <li class="breadcrumb-item active">Manage Category</li>
                   </ol>
                 </div>
               </div>
@@ -29,37 +29,23 @@
                   <tr>
                     <th>id</th>
                     <th>Title</th>
-                    <th>Duration</th>
-                    <th>price</th>
-                    <th>Image</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($courses as $item)
+                    @foreach ($categories as $item)
 
                       <tr>
                           <td>{{ $item->id }}</td>
-                          <td>
-                            <div class="d-flex flex-column">
-                                <div>{{ $item->title }}</div>
-                                <div class="small text-muted capitalize">{{ $item->category->cat_title }}</div>
-                            </div>
-                          </td>
-                          <td>{{ $item->duration }}</td>
-                          <td>{{ $item->fees }}</td>
-                          <td>
-                            @if ($item->image)
-                                <img width="80px" src="{{ asset('storage/'.$item->image) }}"/>
-                            @endif
-                          </td>
-                          <td class="d-flex" style="gap:10px">
-                              <form action="{{ route('courses.destroy',$item) }}" method="post">
+                          <td>{{ $item->cat_title }}</td>
+
+                          <td class="d-flex gap-3">
+                              <form action="{{ route('category.destroy',$item) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                               </form>
-                              <a href='{{ route('courses.edit',$item) }}' class="btn btn-info">Edit</a>
+                              <a href='{{ route('category.edit',$item) }}' class="btn btn-info">Edit</a>
                               <a href='' class="btn btn-success">View</a>
                           </td>
                       </tr>

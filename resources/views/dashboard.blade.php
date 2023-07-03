@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="flex w-full px-24 py-10 gap-10">
-        <div class="w-2/12 bg-white">
+        <div class="w-2/12 ">
             <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-2">
                 <div class="flex justify-end px-4 pt-4">
                     <button id="dropdownButton" data-dropdown-toggle="dropdown"
@@ -43,14 +43,13 @@
                 <div class="flex flex-col items-center pb-10">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://picsum.photos/300"
                         alt="Bonnie image" />
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{auth()->user()->name}}</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">CWSian</span>
                     <div class="flex mt-4 space-x-3 md:mt-6">
                         <a href="#"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
-                            friend</a>
-                        <a href="#"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Message</a>
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Upload DP</a>
+                        <a href="{{route('profile.edit')}}"
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Edit Profile</a>
                     </div>
                 </div>
             </div>
@@ -119,6 +118,9 @@
                     Category
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Join Date
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Status
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -140,7 +142,10 @@
                     </div>
                 </th>
                 <td class="px-6 py-4">
-                    {{$item->course->category}}
+                    {{$item->course->category->cat_title}}
+                </td>
+                <td class="px-6 py-4">
+                    {{date("d M Y",strtotime($item->course->start_date))}}
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex items-center">
@@ -149,7 +154,7 @@
                 </td>
                 <td class="px-6 py-4">
                     <!-- Modal toggle -->
-                    <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <a href="#" type="button" data-modal-target="editUserModal" data-modal-show="editUserModal" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Print Reciept</a>
                 </td>
             </tr>
 

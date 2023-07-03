@@ -12,7 +12,7 @@ class StudentController extends Controller
     //
 
     public function dashboard () {
-        $course = Payment::where('user_id',Auth::id())->get();
+        $course = Payment::where('user_id',Auth::id())->where('status','1')->get();
         return view('dashboard',compact('course'));
     }
 }

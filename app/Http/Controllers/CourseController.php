@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use Str;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
@@ -18,7 +19,8 @@ class CourseController extends Controller
     public function create()
     {
         $update = false;
-        return view('admin.addCourse',compact('update'));
+        $category = Category::all();
+        return view('admin.addCourse',compact('update','category'));
     }
 
     public function store(Request $request)
@@ -31,7 +33,9 @@ class CourseController extends Controller
             'fees' => 'required',
             'discount_fees' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]); 
+            'category' => 'required'
+
+        ]);
 
         $course = new Course;
         $course->title = $request->title;
@@ -41,6 +45,7 @@ class CourseController extends Controller
         $course->description = $request->description;
         $course->fees = $request->fees;
         $course->discount_fees = $request->discount_fees;
+        $course->category_id = $request->category;
 
         if ($request->hasFile('image')) {
             $uploadedImage = $request->file('image');
@@ -61,7 +66,8 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $update = true;
-        return view('admin.addCourse', compact('course','update'));
+        $category = Category::all();
+        return view('admin.addCourse', compact('course','update','category'));
     }
 
     public function update(Request $request, Course $course)
@@ -73,7 +79,8 @@ class CourseController extends Controller
             'start_date' => 'required|date',
             'fees' => 'required',
             'discount_fees' => 'required',
-        ]); 
+            'category' => 'required'
+        ]);
 
         $course->title = $request->title;
         $course->start_date = $request->start_date;
@@ -82,6 +89,7 @@ class CourseController extends Controller
         $course->description = $request->description;
         $course->fees = $request->fees;
         $course->discount_fees = $request->discount_fees;
+        $course->category_id = $request->category;
 
         if ($request->hasFile('image')) {
             $uploadedImage = $request->file('image');

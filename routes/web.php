@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -17,9 +18,6 @@ Route::controller(StudentController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 });
 
-Route::get("/{slug}", [HomeController::class, "viewCourse"])->name('viewCourse');
-
-
 Route::prefix("admin")->group(function () {
 
     Route::controller(AdminController::class)->group(function () {
@@ -30,8 +28,12 @@ Route::prefix("admin")->group(function () {
     Route::middleware('admin.auth')->group(function () {
         Route::view("/", "admin.home")->name('admin.dashboard');
         Route::resource("courses", CourseController::class);
+        Route::resource("category", CategoryController::class);
     });
 });
+
+Route::get("/course/{slug}", [HomeController::class, "viewCourse"])->name('viewCourse');
+
 
 
 Route::middleware('auth')->group(function () {
