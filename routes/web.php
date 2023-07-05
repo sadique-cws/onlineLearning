@@ -39,9 +39,10 @@ Route::get("/course/{slug}", [HomeController::class, "viewCourse"])->name('viewC
 Route::middleware('auth')->group(function () {
     Route::post('/payment/status', [PaytmController::class, 'paymentCallback'])->name('status');
     Route::post('/payment/{slug}', [PaytmController::class, 'pay'])->name('make.payment');
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/picture', [ProfileController::class,'updatePicture'])->name('profile.picture.update');
+
 });
 

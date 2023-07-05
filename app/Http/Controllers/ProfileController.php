@@ -57,4 +57,26 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function updatePicture(Request $request)
+    {
+        $request->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Define validation rules for the picture
+        ]);
+
+        // Handle picture upload and update logic
+        if ($request->hasFile('picture')) {
+            $picture = $request->file('picture');
+            $fileName = time().'.'.$picture->getClientOriginalExtension();
+            $picture->move(public_path('dp'), $fileName);
+
+            // Save the picture path in the user's profile or wherever you want to store it
+            // Example:
+            auth()->user()->update([
+                'picture' => 'dp/'.$fileName,
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Profile picture updated successfully!');
+    }
 }
