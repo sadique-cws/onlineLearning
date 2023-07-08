@@ -13,6 +13,9 @@ require __DIR__ . '/auth.php';
 
 
 Route::get("/", [HomeController::class, "index"])->name('homepage');
+Route::view("/about", "home.about")->name('about');
+Route::view("/contact", "home.contact")->name('contact');
+Route::get("/courses/{cat_slug?}", [HomeController::class, "allCourse"])->name('courses');
 
 Route::controller(StudentController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,7 +35,7 @@ Route::prefix("admin")->group(function () {
     });
 });
 
-Route::get("/course/{slug}", [HomeController::class, "viewCourse"])->name('viewCourse');
+Route::get("/course/{cat_slug}/{slug}", [HomeController::class, "viewCourse"])->name('viewCourse');
 
 
 

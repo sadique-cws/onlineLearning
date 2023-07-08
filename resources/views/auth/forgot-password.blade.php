@@ -1,6 +1,10 @@
 @extends('auth.layout')
 
 @section('authcontent')
+<div class="border p-3 rounded shadow">
+    <div class="flex mb-3 border-b pb-3">
+        <h2 class="text-xl font-semibold font-sans text-slate-500">Forget Password?</h2>
+    </div>
 <form method="POST" action="{{ route('password.email') }}">
     @csrf
 
@@ -17,4 +21,5 @@
         </x-primary-button>
     </div>
 </form>
+</div>
 @endsection

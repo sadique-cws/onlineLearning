@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="flex w-full md:px-24 px-5 py-10 gap-10 md:flex-row flex-col">
-        <div class="md:w-2/12 sm:flex-1">
+        <div class="md:w-2/12">
             <div
                 class="w-full bg-white border  border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-2">
                 <div class="flex justify-end px-4 pt-4">
@@ -66,7 +66,7 @@
             </div>
 
         </div>
-        <div class="md:w-10/12 sm:flex-1">
+        <div class="md:w-10/12">
             <div class="flex md:flex-row flex-col  justify-between items-center bg-white dark:bg-gray-800 p-5">
                 <h2 class="text-xl font-bold font-sans text-slate-400">My Static</h2>
 

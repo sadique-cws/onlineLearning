@@ -16,4 +16,9 @@ class Course extends Model
      {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
+
+    public function getDiscountPercentage(){
+         $discount = $this->attributes['fees'] - $this->attributes['discount_fees'];
+         return round(($discount / $this->attributes['fees']) * 100);
+    }
 }
