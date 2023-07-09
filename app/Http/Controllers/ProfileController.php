@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Placement;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,19 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $placement = Placement::where('user_id',Auth::id())->first();
+        
+        if(!$placement){
+            Placement::create(['user_id'=>Auth::id()]);
+        }
+
+
         return view('profile.edit', [
             'user' => $request->user(),
+            "placement"=>$placement
         ]);
+
+    
     }
 
     /**
@@ -56,6 +67,19 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function updatePlacement(Request $request){
+            
+            $data = $request->validate([
+                'company_name'=>'required',
+                'role'=>'required',
+                'job_type'=>'required',
+                'description'=>'required',
+            ]);
+
+           Placement::where('user_id',Auth::id())->first()->update($data);
+           return redirect()->back()->with('status','placement-updated');
     }
 
     public function updatePicture(Request $request)

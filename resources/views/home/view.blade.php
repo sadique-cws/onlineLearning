@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-    <section class="bg-teal-600 text-white md:py-7 md:px-24 border mt-16">
+    <section class="bg-teal-600 text-white sm:py-7 sm:px-24 border mt-16">
         <div class="container mx-auto flex flex-col gap-2">
 
             <nav class="flex" aria-label="Breadcrumb">
@@ -24,7 +24,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="#"
+                            <a href="{{ route('courses') }}"
                                 class="ml-1 text-sm font-medium text-gray-100 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Courses</a>
                         </div>
                     </li>
@@ -35,7 +35,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="#"
+                            <a href="{{ route('courses',$course->category->cat_slug) }}"
                                 class="ml-1 capitalize text-sm font-medium text-gray-100 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">{{$course->category->cat_title}}</a>
                         </div>
                     </li>
@@ -66,12 +66,12 @@
         </div>
     </section>
     <div class="container mx-auto px-4 mt-5">
-        <div class="flex flex-col md:flex-row gap-5">
+        <div class="flex flex-col md:flex-row p-5 gap-5">
 
-            <div class="md:flex-[3] md:ml-4 mt-4 md:mt-0">
+            <div class="md:flex-[2] md:ml-4 mt-4 md:mt-0">
                 <p class="text-gray-700 mb-4 leading-loose text-xl">{{$course->description}}</p>
 
-                <h2 class="text-2xl text-slate-700 font-black my-5">This Batch Includes</h2>
+                <h2 class="md:text-2xl text-sm text-slate-700 font-black my-5">This Batch Includes</h2>
 
                 <div class=" rounded-lg border p-5  dark:bg-gray-800" id="stats" role="tabpanel" aria-labelledby="stats-tab">
                     <dl class="grid max-w-screen-xl grid-cols-2 gap-4  mx-auto text-gray-900 sm:grid-cols-3 xl:grid-cols-4 dark:text-white sm:p-8">
@@ -151,14 +151,13 @@
             <div class="md:flex-1 md:relative">
                 <div class="md:fixed">
                 <div
-                    class="w-full  md:-mt-36 md:right-24 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    class="w-full md:-mt-52 sm:-mt-48 md:right-24 md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-8 rounded-t-lg" src="{{ asset('storage/' . $course->image) }}" alt="product image" />
+                        <img class=" rounded-t-lg" src="{{ asset('storage/' . $course->image) }}" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
-                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Apple Watch
-                                Series 7 GPS, Aluminium Case, Starlight Sport</h5>
+                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{$course->title}}</h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
                             <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +189,9 @@
                                 class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-3xl font-bold text-gray-900 dark:text-white">₹{{ $course->discount_fees }}</span>
+                            <span class="font-bold text-gray-900 dark:text-white">
+                                <span  class="text-3xl">₹{{ $course->discount_fees }}</span>
+                            </span>
                             <form action="{{ route('make.payment', $course->slug) }}" method="post">
                                 @csrf
                                 <button type="submit"
@@ -204,7 +205,7 @@
         <img class="w-10 h-10 rounded-full" src="{{asset('img/instructor.jpg')}}" alt="">
         <div class="font-medium dark:text-white">
             <div>Syed Sadique Hussain</div>
-            <div class="text-sm text-gray-500 dark:text-gray-400">8+ Years Experience in Software Engg</div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">8+ Years Experience in Software Engg</div>
         </div>
     </div>
 

@@ -29,6 +29,7 @@ class CategoryController extends Controller
 
         $course = new Category();
         $course->cat_title = $request->cat_title;
+        $course->cat_slug = Str::slug($request->cat_title);
         $course->save();
 
 

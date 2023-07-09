@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Placement;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,12 +22,19 @@ class HomeController extends Controller
 
         if($cat_slug==NULL){
             $courses = Course::all();
+            $viewCategory = false;
         }
         else{
-            $category = Category::where('cat_slug',$cat_slug)->firstOrFail();
-            $courses = Course::where('category_id',$category->id)->get();
+            $viewCategory = Category::where('cat_slug',$cat_slug)->firstOrFail();
+            $courses = Course::where('category_id',$viewCategory->id)->get();
         }
 
-        return view('home.courses',compact('courses','cat_slug'));
+        return view('home.courses',compact('courses','cat_slug','viewCategory'));
+    }
+
+    public function placements(){
+        $placements = DB::table('oldPlacements')->get();
+        $newplacements = Placement::where([['company_name','!=',NULL],["company_name","!=",""]])->get();
+        return view("home.placement",compact("placements","newplacements"));
     }
 }

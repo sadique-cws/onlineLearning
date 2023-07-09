@@ -21,7 +21,10 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <div class="col-3">
+            {{-- @include('admin.addCategory') --}}
+          </div>
+           <div class="col-9">
             <div class="card">
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover table-sm">
@@ -39,7 +42,7 @@
                           <td>{{ $item->id }}</td>
                           <td>{{ $item->cat_title }}</td>
 
-                          <td class="d-flex gap-3">
+                          <td class="d-flex gap-3" style="gap:5px">
                               <form action="{{ route('category.destroy',$item) }}" method="post">
                                 @csrf
                                 @method('delete')
@@ -58,6 +61,7 @@
 
             <!-- /.card -->
           </div>
+         
           <!-- /.col -->
         </div>
         <!-- /.row -->

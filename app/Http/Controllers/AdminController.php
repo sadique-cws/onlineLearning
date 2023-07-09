@@ -2,12 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Payment;
+use App\Models\StudentProject;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    public function index(){
+        $newStudents =User::whereDoesntHave("payments")->get();
+        $students =  User::has("payments")->get();
+        $payments = Payment::orderBy("id","DESC")->get();
+        $projects =  StudentProject::count();
+        return view('admin.home',compact('newStudents','students','projects','payments'));
+    }
+
+    public function manageStudents(){
+        $students = User::has("payments")->get();
+        return view("admin.user",compact("students"));
+    }
     public function login(Request $req){
 
         // $admin = new Admin();
@@ -38,4 +52,11 @@ class AdminController extends Controller
 
         return redirect('/');
     }
+
+    public function manageProjects(){
+        $projects = StudentProject::orderBy('id',"DESC")->get();
+        return view('admin.projects',compact('projects'));
+    }
+    
+    
 }

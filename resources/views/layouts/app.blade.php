@@ -15,7 +15,6 @@
         <script src="https://cdn.tailwindcss.com"></script>
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -29,6 +28,10 @@
                 {{ $slot }}
             </main>
         </div>
+        @include("includes.drawer")
+
+        @include("includes.footer")
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
 
     </body>
