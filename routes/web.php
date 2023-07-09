@@ -13,17 +13,16 @@ use App\Http\Controllers\StudentProjectController;
 
 require __DIR__ . '/auth.php';
 
-
-Route::get("/", [HomeController::class, "index"])->name('homepage');
-Route::view("/about", "home.about")->name('about');
-Route::view("/contact", "home.contact")->name('contact');
-Route::get("/achievement", [HomeController::class,"placements"])->name('placements');
-Route::get("/courses/{cat_slug?}", [HomeController::class, "allCourse"])->name('courses');
-
-
+Route::controller(HomeController::class)->group(function () {
+    Route::get("/","index")->name('homepage');
+    Route::view("/about", "about")->name('about');
+    Route::view("/contact", "contact")->name('contact');
+    Route::get("/achievement", "placements")->name('placements');
+    Route::get("/courses/{cat_slug?}", "allCourse")->name('courses');
+    Route::get("/course/{cat_slug}/{slug}", "viewCourse")->name('viewCourse');
+});
 
 Route::prefix("admin")->group(function () {
-
     Route::controller(AdminController::class)->group(function () {
         Route::match(["post", "get"], '/login', 'login')->name("admin.login");
         Route::get('/logout', 'logout')->name("admin.logout");
@@ -31,8 +30,9 @@ Route::prefix("admin")->group(function () {
 
     Route::middleware('admin.auth')->group(function () {
         Route::controller(AdminController::class)->group(function () {
-            Route::get('/manage/project', 'manageProjects')->name("admin.manage.projects");
-            Route::get('/manage/student', 'manageStudents')->name("admin.manage.students");
+            Route::get('/manage/projects', 'manageProjects')->name("admin.manage.projects");
+            Route::get('/manage/students', 'manageStudents')->name("admin.manage.students");
+            Route::get('/manage/payments', 'managePayments')->name("admin.manage.payments");
             Route::get("/", "index")->name('admin.dashboard');
         });
 
@@ -45,7 +45,6 @@ Route::prefix("admin")->group(function () {
     });
 });
 
-Route::get("/course/{cat_slug}/{slug}", [HomeController::class, "viewCourse"])->name('viewCourse');
 
 
 
@@ -55,14 +54,19 @@ Route::prefix("student")->group(function(){
             Route::get('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
         });
         Route::resource("project",StudentProjectController::class);
-    
-        Route::post('/payment/status', [PaytmController::class, 'paymentCallback'])->name('status');
-        Route::post('/payment/{slug}', [PaytmController::class, 'pay'])->name('make.payment');
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile/placement', [ProfileController::class, 'updatePlacement'])->name('profile.edit.placement');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        Route::post('/profile/picture', [ProfileController::class,'updatePicture'])->name('profile.picture.update');
-    
+        Route::controller(PaytmController::class)->group(function () {
+            Route::post('/payment/status', 'paymentCallback')->name('status');
+            Route::post('/payment/{slug}', 'pay')->name('make.payment');
+        });
+
+        Route::controller(ProfileController::class)->group(function () {
+            Route::get('/profile', 'edit')->name('profile.edit');
+            Route::patch('/profile/placement', 'updatePlacement')->name('profile.edit.placement');
+            Route::patch('/profile', 'update')->name('profile.update');
+            Route::delete('/profile', 'destroy')->name('profile.destroy');
+            Route::post('/profile/picture','updatePicture')->name('profile.picture.update');
+        });
+
+
     });
 });

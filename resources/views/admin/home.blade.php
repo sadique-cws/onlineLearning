@@ -71,7 +71,7 @@
                     <!-- /.col -->
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="info-box mb-3">
-                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                            <span class="info-box-icon bg-warning elevation-1 text-white"><i class="fas fa-desktop"></i></span>
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Projects</span>
@@ -174,7 +174,7 @@
                                                     <td>{{ $item->course->title }}</td>
                                                     <td>
                                                       @if ($item->status)
-                                                      <span class="badge badge-success">Paid</span>    
+                                                      <span class="badge badge-success">Paid</span>
                                                     @else
                                                     <span class="badge badge-danger">Pending</span>
                                                     @endif
@@ -209,7 +209,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Category</span>
-                                <span class="info-box-number">5,200</span>
+                                <span class="info-box-number">{{count($category)}}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -219,11 +219,11 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Placements</span>
-                                <span class="info-box-number">92,050</span>
+                                <span class="info-box-number">{{$placements}}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
-                       
+
                         <!-- /.card -->
                     </div>
                     <!-- /.col -->

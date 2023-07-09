@@ -31,8 +31,9 @@
                     <th>order</th>
                     <th>course name</th>
                     <th>student name</th>
+                    <th>Contact</th>
                     <th>amount</th>
-                    <th></th>
+                    <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -43,7 +44,9 @@
                           <td>{{ $item->order_id }}</td>
                           <td>{{ $item->course->title }}</td>
                           <td>{{ $item->name }}</td>
-                          <td>{{ $item->fees }}</td>
+                          <td>{{ $item->user->mobile }}</td>
+                          <td>{{ $item->fee }}</td>
+                          <td>{{ ($item->status)? "Paid" : "Pending" }}</td>
                       </tr>
                     @endforeach
                   </tbody>

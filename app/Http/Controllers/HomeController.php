@@ -37,4 +37,11 @@ class HomeController extends Controller
         $newplacements = Placement::where([['company_name','!=',NULL],["company_name","!=",""]])->get();
         return view("home.placement",compact("placements","newplacements"));
     }
+
+    public function about(){
+        return  view("home.about");
+    }
+    public function contact(){
+        return  view("home.contact");
+    }
 }

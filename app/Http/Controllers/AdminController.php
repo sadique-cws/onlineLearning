@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Payment;
+use App\Models\Placement;
 use App\Models\StudentProject;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +17,8 @@ class AdminController extends Controller
         $students =  User::has("payments")->get();
         $payments = Payment::orderBy("id","DESC")->get();
         $projects =  StudentProject::count();
-        return view('admin.home',compact('newStudents','students','projects','payments'));
+        $placements =  Placement::count();
+        return view('admin.home',compact('newStudents','students','projects','payments','placements'));
     }
 
     public function manageStudents(){
@@ -34,12 +37,12 @@ class AdminController extends Controller
 
             if (Auth::guard('admin')->attempt($credentials)) {
                 // Authentication successful
-                return redirect()->intended('/admin'); 
+                return redirect()->intended('/admin');
             }
-        
+
             // Authentication failed
             return redirect()->back()->withInput()->withErrors(['email' => 'Invalid credentials']);
-        
+
         }
         return view("admin.login");
     }
@@ -57,6 +60,10 @@ class AdminController extends Controller
         $projects = StudentProject::orderBy('id',"DESC")->get();
         return view('admin.projects',compact('projects'));
     }
-    
-    
+    public function managePayments(){
+        $payments = Payment::orderBy('id',"DESC")->get();
+        return view('admin.payments',compact('payments'));
+    }
+
+
 }
