@@ -15,8 +15,8 @@ require __DIR__ . '/auth.php';
 
 Route::controller(HomeController::class)->group(function () {
     Route::get("/","index")->name('homepage');
-    Route::view("/about", "about")->name('about');
-    Route::view("/contact", "contact")->name('contact');
+    Route::get("/about", "about")->name('about');
+    Route::get("/contact", "contact")->name('contact');
     Route::get("/achievement", "placements")->name('placements');
     Route::get("/courses/{cat_slug?}", "allCourse")->name('courses');
     Route::get("/course/{cat_slug}/{slug}", "viewCourse")->name('viewCourse');

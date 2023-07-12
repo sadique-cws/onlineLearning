@@ -22,8 +22,11 @@ class="w-full bg-white border  border-gray-200 rounded-lg shadow dark:bg-gray-80
             </li>
 
             <li>
-                <a href="{{ route('logout') }}"
-                    class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">logout</a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 w-full dark:text-gray-200 dark:hover:text-white">logout
+                    </button>
+                    </form>
             </li>
         </ul>
     </div>
@@ -58,13 +61,9 @@ class="w-full bg-white border  border-gray-200 rounded-lg shadow dark:bg-gray-80
 </div>
 <ul
 class="w-full mt-4 shadow-md text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-<a href="#" aria-current="true"
-    class="block w-full px-4 py-2 border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
-    Payments
-</a>
 
 <a href="{{ route('project.index') }}"
-    class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
+    class="block w-full px-4 py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
     Projects
 </a>
 </ul>

@@ -17,7 +17,7 @@
             
         <div class="w-full">
             <div class="h-full flex border shadow rounded-sm sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-              <img alt="team" class="flex-shrink-0 w-32 h-32 object-center object-cover sm:mb-0 mb-4" src="{{ auth()->user()->picture ? asset(auth()->user()->picture) : 'img/default.jpg' }}">
+              <img alt="team" class="flex-shrink-0 w-32 h-32 object-center object-cover sm:mb-0 mb-4" src="{{ $item->user->picture ? asset($item->user->picture) : 'img/default.jpg' }}">
               <div class="flex-grow sm:pl-8 p-4">
                 <h2 class="title-font font-medium text-lg text-gray-900">{{ $item->user->name }}</h2>
                 <h3 class="text-gray-500 mb-1">{{ $item->role }}</h3>
